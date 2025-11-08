@@ -1,0 +1,5 @@
+@source "./src/**/*.{rs,html,css}";
+@import "tailwindcss";
+@plugin "daisyui" {
+    themes: nord --default, dim --prefersdark;
+}
