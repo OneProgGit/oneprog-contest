@@ -8,65 +8,49 @@ pub fn Navbar() -> Element {
         div { class: "navbar bg-base-200 flex flex-col gap-5 items-start justify-start",
             id: "navbar",
 
-            h1 { class: "text-4xl",
+            h1 { class: "text-4xl font-bold",
                 "OneProg Контест"
             }
 
             div { role: "tablist", class: "tabs tabs-box gap-2 bg-base-300",
-                Link {
+                Link { role: "tab", class: "tab",
                     to: Route::Home {},
-                    button { role: "tab", class: "tab",
-                        "Главная"
-                    }
+                    "Главная"
                 }
 
-                Link {
+                Link { role: "tab", class: "tab",
                     to: Route::Problems {},
-                    button { role: "tab", class: "tab",
-                        "Задачи"
-                    }
+                    "Задачи"
                 }
 
-                Link {
+                Link { role: "tab", class: "tab",
                     to: Route::Contests {},
-                    button { role: "tab", class: "tab",
-                        "Контесты"
-                    }
+                    "Контесты"
                 }
 
-                Link {
+                Link { role: "tab", class: "tab",
                     to: Route::Competitions {},
-                    button { role: "tab", class: "tab",
-                        "Соревнования"
-                    }
+                    "Соревнования"
                 }
 
-                Link {
+                Link { role: "tab", class: "tab",
                     to: Route::Market {},
-                    button { role: "tab", class: "tab",
-                        "Рынок"
-                    }
+                    "Рынок"
                 }
 
-                Link {
+                Link { role: "tab", class: "tab",
                     to: Route::Business {},
-                    button { role: "tab", class: "tab",
-                        "Бизнес"
-                    }
+                    "Бизнес"
                 }
 
-                Link {
+                Link { role: "tab", class: "tab",
                     to: Route::Support {},
-                    button { role: "tab", class: "tab",
-                        "Поддержать"
-                    }
-                }
+                    "Поддержать"
+                },
 
-                Link {
+                Link { role: "tab", class: "tab",
                     to: Route::Account {},
-                    button { role: "tab", class: "tab",
-                        "Аккаунт"
-                    }
+                    "Аккаунт"
                 }
             }
         }
