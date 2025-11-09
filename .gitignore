@@ -1,8 +1,14 @@
-# Rust
+# Output
 /target
+/public
+/server
 
 # Javascript
 /node_modules
 
-# Tailwind css generated
-/assets/css
+# Tailwind
+/assets/main.css
+/assets/tailwind.css
+
+# Environment
+.env
