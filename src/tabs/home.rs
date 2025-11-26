@@ -3,7 +3,7 @@ use dioxus::prelude::*;
 #[component]
 fn BlogPost(author: String, title: String, content: String) -> Element {
     rsx! {
-        div { class: "card bg-base-300 w-96 shadow-sm" ,
+        div { class: "card bg-base-300 w-96 shadow-sm",
             div { class: "card-body",
                 h1 { class: "card-title",
                     { title }
