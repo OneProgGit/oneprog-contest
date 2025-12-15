@@ -6,7 +6,7 @@ mod navbar;
 mod route;
 mod tabs;
 
-const MAIN_CSS: Asset = asset!("/assets/main.css");
+const MAIN_CSS: Asset = asset!("/assets/tailwind.css");
 
 fn main() {
     dioxus::launch(App);

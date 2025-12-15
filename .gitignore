@@ -7,7 +7,6 @@
 /node_modules
 
 # Tailwind
-/assets/main.css
 /assets/tailwind.css
 
 # Environment
