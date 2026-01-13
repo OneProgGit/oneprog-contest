@@ -1,13 +1,6 @@
-# Output
 /target
 /public
 /server
-
-# Javascript
 /node_modules
-
-# Tailwind
 /assets/tailwind.css
-
-# Environment
 .env
