@@ -2,6 +2,9 @@ use dioxus::prelude::*;
 
 use crate::route::Route;
 
+#[cfg(feature = "server")]
+mod database;
+pub mod models;
 mod navbar;
 mod route;
 mod tabs;
