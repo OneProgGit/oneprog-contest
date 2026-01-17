@@ -1,5 +1,3 @@
-#![cfg(feature = "server")]
-
 use uuid::Uuid;
 
 use crate::models::{
@@ -16,5 +14,5 @@ pub trait Database: Send + Sync + Clone {
     async fn get_user_by_id(&self, id: Uuid) -> anyhow::Result<User>;
     async fn get_user_by_username(&self, username: &str) -> anyhow::Result<User>;
     async fn create_post(&self, post: DatabasePost) -> anyhow::Result<()>;
-    async fn get_k_posts(&self, k: u32) -> anyhow::Result<Vec<Post>>;
+    async fn get_posts(&self) -> anyhow::Result<Vec<Post>>;
 }

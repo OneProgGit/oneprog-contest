@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+#[cfg(feature = "server")]
 use sqlx::prelude::FromRow;
 use uuid::Uuid;
 
@@ -14,7 +15,9 @@ pub struct DatabasePost {
     pub content: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, FromRow)]
+#[derive(Serialize, Deserialize, Debug)]
+#[cfg(feature = "server")]
+#[derive(FromRow)]
 pub struct Post {
     pub id: Uuid,
     pub author: String,

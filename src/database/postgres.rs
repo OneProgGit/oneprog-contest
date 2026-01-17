@@ -1,13 +1,13 @@
-use anyhow::Ok;
-use sqlx::{PgPool, postgres::PgPoolOptions};
 use std::sync::Arc;
+
+use sqlx::{PgPool, postgres::PgPoolOptions};
 use uuid::Uuid;
 
 use crate::{
-    db::Database,
+    database::Database,
     models::{
-        post::{NewDbPost, Post},
-        user::{NewDbUser, User},
+        post::{DatabasePost, Post},
+        user::{DatabaseUser, User},
     },
 };
 
@@ -22,7 +22,7 @@ impl Database for PostgresDatabase {
         Ok(Arc::new(Self { pool }))
     }
 
-    async fn create_user(&self, user: NewDbUser) -> anyhow::Result<()> {
+    async fn create_user(&self, user: DatabaseUser) -> anyhow::Result<()> {
         sqlx::query(
             "
             INSERT INTO users (username, hashed_password)
@@ -52,14 +52,14 @@ impl Database for PostgresDatabase {
         Ok(user)
     }
 
-    async fn create_post(&self, post: NewDbPost) -> anyhow::Result<()> {
+    async fn create_post(&self, post: DatabasePost) -> anyhow::Result<()> {
         sqlx::query(
             "
-            INSERT INTO posts (author, title, content)
+            INSERT INTO posts (author_id, title, content)
             VALUES ($1, $2, $3)
             ",
         )
-        .bind(post.author)
+        .bind(post.author_id)
         .bind(post.title)
         .bind(post.content)
         .execute(&self.pool)

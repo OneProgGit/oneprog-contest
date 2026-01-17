@@ -3,8 +3,8 @@ use dioxus::prelude::*;
 use navbar::Navbar;
 use tabs::{
     account::Account, business::Business, competitions::Competitions, contest::Contest,
-    contests::Contests, home::Home, market::Market, problem::Problem, problems::Problems,
-    support::Support, user::User, users::Users,
+    contests::Contests, home::Home, market::Market, page_not_found::PageNotFound, problem::Problem,
+    problems::Problems, support::Support, user::User, users::Users,
 };
 
 use crate::{navbar, tabs};
@@ -36,4 +36,6 @@ pub enum Route {
     Account {},
     #[route("/u/:id")]
     User { id: usize },
+    #[route("/:..segments")]
+    PageNotFound { segments: Vec<String> },
 }

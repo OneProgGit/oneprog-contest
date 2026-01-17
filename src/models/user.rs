@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+#[cfg(feature = "server")]
 use sqlx::prelude::FromRow;
 use uuid::Uuid;
 
@@ -13,7 +14,9 @@ pub struct DatabaseUser {
     pub hashed_password: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, FromRow)]
+#[derive(Serialize, Deserialize, Debug)]
+#[cfg(feature = "server")]
+#[derive(FromRow)]
 pub struct User {
     pub id: Uuid,
     pub username: String,
