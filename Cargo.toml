@@ -1,6 +1,6 @@
 [package]
 name = "oneprog-contest"
-version = "0.1.0"
+version = "0.1.0-dev"
 authors = ["OneProg <jade.weirdo@gmail.com>"]
 edition = "2024"
 
