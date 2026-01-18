@@ -1,6 +1,5 @@
-use crate::{navbar, tabs};
+use crate::{tabs, wrapper::Wrapper};
 use dioxus::prelude::*;
-use navbar::Navbar;
 use tabs::{
     account::Account, business::Business, competitions::Competitions, contest::Contest,
     contests::Contests, home::Home, market::Market, page_not_found::PageNotFound, problem::Problem,
@@ -9,7 +8,7 @@ use tabs::{
 
 #[derive(Debug, Clone, Routable, PartialEq)]
 pub enum Route {
-    #[layout(Navbar)]
+    #[layout(Wrapper)]
     #[route("/")]
     Home {},
 

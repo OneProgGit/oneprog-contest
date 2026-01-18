@@ -28,9 +28,11 @@ mod middleware;
 #[cfg(feature = "server")]
 pub mod models;
 
+mod footer;
 mod navbar;
 mod route;
 mod tabs;
+mod wrapper;
 
 #[cfg(feature = "server")]
 pub type AppStateType = AppState<PostgresDatabase>;

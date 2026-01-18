@@ -25,7 +25,5 @@ pub fn Navbar() -> Element {
                 Link { role: "tab", class: "tab", to: Route::Account {}, "Аккаунт" }
             }
         }
-
-        div { class: "m-2", Outlet::<Route> {} }
     }
 }
