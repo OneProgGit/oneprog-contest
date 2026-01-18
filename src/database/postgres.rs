@@ -1,8 +1,3 @@
-use std::sync::Arc;
-
-use sqlx::{PgPool, postgres::PgPoolOptions};
-use uuid::Uuid;
-
 use crate::{
     database::Database,
     models::{
@@ -10,6 +5,9 @@ use crate::{
         user::{DatabaseUser, User},
     },
 };
+use sqlx::{PgPool, postgres::PgPoolOptions};
+use std::sync::Arc;
+use uuid::Uuid;
 
 #[derive(Clone)]
 pub struct PostgresDatabase {

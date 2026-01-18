@@ -1,6 +1,8 @@
 use serde::{Deserialize, Serialize};
+
 #[cfg(feature = "server")]
 use sqlx::prelude::FromRow;
+
 use uuid::Uuid;
 
 #[derive(Serialize, Deserialize)]

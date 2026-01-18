@@ -6,7 +6,7 @@ pub fn PageNotFound(segments: Vec<String>) -> Element {
         h1 { class: "text-2xl", "404" }
         div { class: "divider" }
         h1 { class: "italic",
-            "Данная страница не найдена. Проверьте адрес на корректность"
+            "Данная страница не найдена. Проверьте адрес на валидность"
         }
     }
 }

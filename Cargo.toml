@@ -1,24 +1,38 @@
 [package]
 name = "oneprog-contest"
-version = "0.1.0-dev"
+version = "0.1.0"
 authors = ["OneProg <jade.weirdo@gmail.com>"]
 edition = "2024"
 
 [dependencies]
-anyhow = { version = "1.0.100", optional = true }
+anyhow = { version = "1.0.100" }
 argon2 = { version = "0.5.3", optional = true }
 dioxus = { version = "0.7.3", features = ["router", "fullstack"] }
 jsonwebtoken = { version = "10.2.0", features = ["aws_lc_rs"], optional = true }
 serde = { version = "1.0.228", features = ["derive"] }
+serde_json = { version = "1.0.149" }
 tokio = { version = "1.49.0", features = ["full"], optional = true }
-reqwest = { version = "0.13.1", optional = true }
 uuid = { version = "1.19.0", features = ["serde", "v7", "js"] }
-sqlx = { version = "0.8.6", features = ["postgres", "runtime-tokio", "uuid"], optional = true }
+sqlx = { version = "0.8.6", features = [
+    "postgres",
+    "runtime-tokio",
+    "uuid",
+], optional = true }
 chrono = { version = "0.4.43", optional = true }
+dotenvy = { version = "0.15.7" }
+regex = { version = "1.12.2", optional = true }
 
 [features]
 default = ["web"]
-web = ["dioxus/web", "dep:reqwest"]
+web = ["dioxus/web"]
 desktop = ["dioxus/desktop"]
 mobile = ["dioxus/mobile"]
-server = ["dioxus/server", "dep:anyhow", "dep:argon2", "dep:jsonwebtoken", "dep:tokio", "dep:sqlx", "dep:chrono" ]
+server = [
+    "dioxus/server",
+    "dep:argon2",
+    "dep:jsonwebtoken",
+    "dep:tokio",
+    "dep:sqlx",
+    "dep:chrono",
+    "dep:regex"
+]
