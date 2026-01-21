@@ -1,11 +1,11 @@
-use crate::{AppStateType, database::Database, jwt::decode_jwt, models::user::User};
+use crate::{AppStateType, database::Database, jwt::decode_jwt, models::user::FullUser};
 use dioxus::{
     fullstack::extract::FromRef,
     prelude::{HttpError, OrHttpError},
     server::axum::{extract::FromRequestParts, http::request::Parts},
 };
 
-pub struct Auth(pub User);
+pub struct Auth(pub FullUser);
 
 impl<S> FromRequestParts<S> for Auth
 where

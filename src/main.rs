@@ -48,6 +48,7 @@ fn main() -> anyhow::Result<()> {
     dioxus::serve(|| async move {
         use crate::database::Database;
         use dioxus::server::axum::Extension;
+
         let db_url = dotenvy::var("DB_URL").expect("DB_URL must be set!");
         let db = PostgresDatabase::new(db_url)
             .await

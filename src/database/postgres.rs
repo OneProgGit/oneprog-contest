@@ -2,7 +2,7 @@ use crate::{
     database::Database,
     models::{
         post::{DatabasePost, Post},
-        user::{DatabaseUser, User},
+        user::{DatabaseUser, FullUser},
     },
 };
 use sqlx::{PgPool, postgres::PgPoolOptions};
@@ -34,7 +34,7 @@ impl Database for PostgresDatabase {
         Ok(())
     }
 
-    async fn get_user_by_id(&self, id: Uuid) -> anyhow::Result<User> {
+    async fn get_user_by_id(&self, id: Uuid) -> anyhow::Result<FullUser> {
         let user = sqlx::query_as("SELECT * FROM users WHERE id=$1")
             .bind(id)
             .fetch_one(&self.pool)
@@ -42,7 +42,7 @@ impl Database for PostgresDatabase {
         Ok(user)
     }
 
-    async fn get_user_by_username(&self, username: &str) -> anyhow::Result<User> {
+    async fn get_user_by_username(&self, username: &str) -> anyhow::Result<FullUser> {
         let user = sqlx::query_as("SELECT * FROM users WHERE username=$1")
             .bind(username)
             .fetch_one(&self.pool)

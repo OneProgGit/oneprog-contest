@@ -2,7 +2,7 @@
 
 use crate::models::{
     post::{DatabasePost, Post},
-    user::{DatabaseUser, User},
+    user::{DatabaseUser, FullUser},
 };
 use std::sync::Arc;
 use uuid::Uuid;
@@ -11,14 +11,9 @@ pub mod postgres;
 
 pub trait Database: Send + Sync + Clone {
     async fn new(url: String) -> anyhow::Result<Arc<Self>>;
-
     async fn create_user(&self, user: DatabaseUser) -> anyhow::Result<()>;
-
-    async fn get_user_by_id(&self, id: Uuid) -> anyhow::Result<User>;
-
-    async fn get_user_by_username(&self, username: &str) -> anyhow::Result<User>;
-
+    async fn get_user_by_id(&self, id: Uuid) -> anyhow::Result<FullUser>;
+    async fn get_user_by_username(&self, username: &str) -> anyhow::Result<FullUser>;
     async fn create_post(&self, post: DatabasePost) -> anyhow::Result<()>;
-
     async fn get_posts(&self) -> anyhow::Result<Vec<Post>>;
 }
