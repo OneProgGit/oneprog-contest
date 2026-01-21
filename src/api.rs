@@ -1,4 +1,4 @@
-mod login;
-mod posts;
-mod register;
-mod user;
+pub mod login;
+pub mod posts;
+pub mod register;
+pub mod user;

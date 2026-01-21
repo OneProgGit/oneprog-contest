@@ -3,7 +3,7 @@ use dioxus::prelude::*;
 use dioxus::server::axum::extract::State;
 use serde_json::{Value, json};
 
-#[get("/u/me", State(_): State<AppStateType>, Auth(user): Auth)]
+#[get("/api/u/me", State(_): State<AppStateType>, Auth(user): Auth)]
 async fn get_my_data() -> Result<Value> {
     let public_user = PublicUser {
         id: user.id,

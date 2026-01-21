@@ -9,7 +9,7 @@ use dioxus::server::axum::extract::{Json, State};
 use regex::Regex;
 use serde_json::{Value, json};
 
-#[post("/u/register", State(state): State<AppStateType>)]
+#[post("/api/u/register", State(state): State<AppStateType>)]
 pub async fn register(Json(user): Json<AuthRequest>) -> Result<Value, HttpError> {
     (user.username.len() >= 4 && user.username.len() <= 16)
         .or_bad_request("Логин может содержать минимум 4 и максимум 16 символов")?;

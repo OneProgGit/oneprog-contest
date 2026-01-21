@@ -8,7 +8,7 @@ use dioxus::prelude::*;
 use dioxus::server::axum::extract::{Json, State};
 use serde_json::{Value, json};
 
-#[post("/posts", State(state): State<AppStateType>, Auth(user): Auth)]
+#[post("/api/posts", State(state): State<AppStateType>, Auth(user): Auth)]
 async fn create_post(Json(post): Json<CreatePostRequest>) -> Result<Value, HttpError> {
     (user.admin).or_forbidden("Для создания поста необходимы привилегии администратора")?;
 
@@ -27,7 +27,7 @@ async fn create_post(Json(post): Json<CreatePostRequest>) -> Result<Value, HttpE
     Ok(json!({ "message" : "Пост создан успешно" }))
 }
 
-#[get("/posts", State(state): State<AppStateType>)]
+#[get("/api/posts", State(state): State<AppStateType>)]
 pub async fn get_posts() -> Result<Value, HttpError> {
     let posts = state
         .db

@@ -11,6 +11,7 @@ pub struct CreatePostRequest {
     pub content: String,
 }
 
+#[cfg(feature = "server")]
 pub struct DatabasePost {
     pub author_id: Uuid,
     pub title: String,
@@ -18,8 +19,7 @@ pub struct DatabasePost {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-#[cfg(feature = "server")]
-#[derive(FromRow)]
+#[cfg_attr(feature = "server", derive(FromRow))]
 pub struct Post {
     pub id: Uuid,
     pub author_id: Uuid,

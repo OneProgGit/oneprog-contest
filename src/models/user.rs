@@ -11,6 +11,7 @@ pub struct AuthRequest {
     pub password: String,
 }
 
+#[cfg(feature = "server")]
 pub struct DatabaseUser {
     pub username: String,
     pub hashed_password: String,
@@ -25,7 +26,7 @@ pub struct FullUser {
     pub admin: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct PublicUser {
     pub id: Uuid,
     pub username: String,

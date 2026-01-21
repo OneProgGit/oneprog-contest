@@ -1,5 +1,20 @@
 use dioxus::prelude::*;
 
+#[cfg(feature = "server")]
+use crate::api::posts::get_posts;
+
+#[component]
+pub fn Home() -> Element {
+    let posts = use_resource(|| async {
+        get_posts().await;
+    });
+
+    rsx! {
+        h1 { "Блог" }
+        div { class: "divider" }
+    }
+}
+
 #[component]
 fn BlogPost(author: String, title: String, content: String) -> Element {
     rsx! {
@@ -10,13 +25,5 @@ fn BlogPost(author: String, title: String, content: String) -> Element {
                 p { {content} }
             }
         }
-    }
-}
-
-#[component]
-pub fn Home() -> Element {
-    rsx! {
-        h1 { "Блог" }
-        div { class: "divider" }
     }
 }

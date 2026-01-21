@@ -1,17 +1,13 @@
+use crate::app_state::ClientAppState;
 use crate::route::Route;
-
-#[cfg(feature = "server")]
-use crate::{app_state::AppState, database::postgres::PostgresDatabase};
-
 use anyhow::Ok;
 use dioxus::prelude::*;
 use dotenvy::dotenv;
 
 #[cfg(feature = "server")]
-mod api;
+use crate::{app_state::AppState, database::postgres::PostgresDatabase};
 
-#[cfg(feature = "server")]
-mod app_state;
+mod api;
 
 #[cfg(feature = "server")]
 mod crypt;
@@ -25,10 +21,9 @@ mod jwt;
 #[cfg(feature = "server")]
 mod middleware;
 
-#[cfg(feature = "server")]
-pub mod models;
-
+mod app_state;
 mod footer;
+pub mod models;
 mod navbar;
 mod route;
 mod tabs;
@@ -54,10 +49,7 @@ fn main() -> anyhow::Result<()> {
             .await
             .expect("Failed to connect to database");
         let state = AppStateType { db };
-        let router = dioxus::server::router(App);
-        let router = dioxus::server::router(App)
-            .nest("/api", router)
-            .layer(Extension(state));
+        let router = dioxus::server::router(App).layer(Extension(state));
         Ok(router)
     });
 
@@ -66,6 +58,12 @@ fn main() -> anyhow::Result<()> {
 
 #[component]
 fn App() -> Element {
+    let state = ClientAppState {
+        user: Signal::new(None),
+    };
+
+    use_context_provider(|| state);
+
     rsx! {
         document::Stylesheet { href: MAIN_CSS }
         Router::<Route> {}

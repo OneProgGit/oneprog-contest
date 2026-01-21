@@ -10,7 +10,7 @@ use dioxus::prelude::*;
 use dioxus::server::axum::extract::{Json, State};
 use serde_json::{Value, json};
 
-#[post("/u/login", State(state): State<AppStateType>)]
+#[post("/api/u/login", State(state): State<AppStateType>)]
 async fn login(Json(user): Json<AuthRequest>) -> Result<Value, HttpError> {
     let expected_user = state
         .db
