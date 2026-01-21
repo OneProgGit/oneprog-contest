@@ -7,10 +7,9 @@ use crate::{
 use dioxus::prelude::*;
 use dioxus::server::axum::extract::{Json, State};
 use regex::Regex;
-use serde_json::{Value, json};
 
 #[post("/api/u/register", State(state): State<AppStateType>)]
-pub async fn register(Json(user): Json<AuthRequest>) -> Result<Value, HttpError> {
+pub async fn register(Json(user): Json<AuthRequest>) -> Result<(), HttpError> {
     (user.username.len() >= 4 && user.username.len() <= 16)
         .or_bad_request("Логин может содержать минимум 4 и максимум 16 символов")?;
     (user.password.len() >= 8 && user.password.len() <= 32)
@@ -40,5 +39,5 @@ pub async fn register(Json(user): Json<AuthRequest>) -> Result<Value, HttpError>
             "Не удалось зарегистрировать пользователя. Возможно, пользователь с таким логином уже существует",
         )?;
 
-    Ok(json!({ "message": "Пользователь зарегистрирован успешно" }))
+    Ok(())
 }

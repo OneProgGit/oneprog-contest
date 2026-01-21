@@ -2,7 +2,7 @@ use crate::{
     AppStateType,
     database::Database,
     middleware::auth::Auth,
-    models::post::{CreatePostRequest, DatabasePost},
+    models::post::{CreatePostRequest, DatabasePost, Post},
 };
 use dioxus::prelude::*;
 use dioxus::server::axum::extract::{Json, State};
@@ -28,11 +28,11 @@ async fn create_post(Json(post): Json<CreatePostRequest>) -> Result<Value, HttpE
 }
 
 #[get("/api/posts", State(state): State<AppStateType>)]
-pub async fn get_posts() -> Result<Value, HttpError> {
+pub async fn get_posts() -> Result<Vec<Post>, HttpError> {
     let posts = state
         .db
         .get_posts()
         .await
         .or_internal_server_error("Ошибка сервера при получении постов")?;
-    Ok(json!(posts))
+    Ok(posts)
 }

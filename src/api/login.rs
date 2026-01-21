@@ -8,10 +8,9 @@ use crate::{
 use chrono::{Duration, Utc};
 use dioxus::prelude::*;
 use dioxus::server::axum::extract::{Json, State};
-use serde_json::{Value, json};
 
 #[post("/api/u/login", State(state): State<AppStateType>)]
-async fn login(Json(user): Json<AuthRequest>) -> Result<Value, HttpError> {
+async fn login(Json(user): Json<AuthRequest>) -> Result<String, HttpError> {
     let expected_user = state
         .db
         .get_user_by_username(&user.username)
@@ -33,5 +32,5 @@ async fn login(Json(user): Json<AuthRequest>) -> Result<Value, HttpError> {
     let token = create_jwt(&claims, &secret)
         .or_internal_server_error("Не удалось создать аутентификационный ключ")?;
 
-    Ok(json!({ "message": "Вход в аккаунт произведён успешно", "token": token }))
+    Ok(token)
 }
