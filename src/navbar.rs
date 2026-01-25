@@ -16,26 +16,52 @@ pub fn Navbar() -> Element {
             h1 { class: "text-4xl font-bold", "OneProg Контест v{VERSION}" }
         }
 
-        div { class: "flex gap-8 items-center justify-start",
-            div { role: "tablist", class: "tabs tabs-box gap-2 bg-base-300",
-                Link { role: "tab", class: "tab", to: Route::Home {}, "Главная" }
-                Link { role: "tab", class: "tab", to: Route::Problems {}, "Задачи" }
-                Link { role: "tab", class: "tab", to: Route::Contests {}, "Контесты" }
+        div { class: "flex w-full gap-8 w-auto items-center justify-start",
+            div {
+                role: "tablist",
+                class: "tabs w-full tabs-box w-auto gap-2 bg-base-300",
+                Link { role: "tab", class: "tab flex-1", to: Route::Home {}, "Главная" }
+                Link {
+                    role: "tab",
+                    class: "tab flex-1",
+                    to: Route::Problems {},
+                    "Задачи"
+                }
+                Link {
+                    role: "tab",
+                    class: "tab flex-1",
+                    to: Route::Contests {},
+                    "Контесты"
+                }
 
-                Link { role: "tab", class: "tab", to: Route::Competitions {},
+                Link {
+                    role: "tab",
+                    class: "tab flex-1",
+                    to: Route::Competitions {},
                     "Соревнования"
                 }
 
-                Link { role: "tab", class: "tab", to: Route::Market {}, "Рынок" }
-                Link { role: "tab", class: "tab", to: Route::Business {}, "Бизнес" }
-                Link { role: "tab", class: "tab", to: Route::Support {}, "Поддержать" }
-                Link { role: "tab", class: "tab", to: Route::Account {}, "Аккаунт" }
-            }
-            h1 { class: "font-extrabold",
-                if let Some(user) = user.as_ref() {
-                    "Залогинен как {user.username}"
-                } else {
-                    "Не залогинен"
+                Link { role: "tab", class: "tab flex-1", to: Route::Market {}, "Рынок" }
+                Link {
+                    role: "tab",
+                    class: "tab flex-1",
+                    to: Route::Business {},
+                    "Бизнес"
+                }
+                Link { role: "tab", class: "tab flex-1", to: Route::Support {},
+                    "Поддержать"
+                }
+                Link { role: "tab", class: "tab flex-1", to: Route::Account {},
+                    {
+                        format!(
+                            "Аккаунт ({})",
+                            if let Some(user) = user.as_ref() {
+                                user.username.clone()
+                            } else {
+                                "нет входа в аккаунт".into()
+                            },
+                        )
+                    }
                 }
             }
         }

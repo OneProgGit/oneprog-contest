@@ -8,7 +8,7 @@ pub fn Home() -> Element {
     let posts_res = use_resource(move || async move { get_posts().await }).suspend()?;
 
     rsx! {
-        h1 { "Блог" }
+        button { class: "btn btn-primary w-auto", "+ Добавить пост" }
         div { class: "divider" }
         SuspenseBoundary {
             fallback: |_ctx| {
@@ -37,7 +37,7 @@ pub fn Home() -> Element {
 #[component]
 fn BlogPost(author_id: Uuid, title: String, content: String) -> Element {
     rsx! {
-        div { class: "card bg-base-300 w-96 shadow-sm",
+        div { class: "card bg-base-300 w-auto shadow-sm",
             div { class: "card-body",
                 h1 { class: "card-title", {title} }
                 div { class: "flex gap-1",

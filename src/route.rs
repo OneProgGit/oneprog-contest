@@ -3,7 +3,7 @@ use dioxus::prelude::*;
 use tabs::{
     account::Account, business::Business, competitions::Competitions, contest::Contest,
     contests::Contests, home::Home, market::Market, page_not_found::PageNotFound, problem::Problem,
-    problems::Problems, support::Support, user::User, users::Users,
+    problems::Problems, support::Support, user::User,
 };
 
 #[derive(Debug, Clone, Routable, PartialEq)]
@@ -35,9 +35,6 @@ pub enum Route {
 
     #[route("/support")]
     Support {},
-
-    #[route("/users")]
-    Users {},
 
     #[route("/u/me")]
     Account {},

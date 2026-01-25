@@ -5,9 +5,9 @@ use crate::{footer::Footer, navbar::Navbar, route::Route};
 #[component]
 pub fn Wrapper() -> Element {
     rsx! {
-        div { class: "flex flex-col gap-4 m-2",
+        div { class: "flex flex-col min-h-screen gap-4 mx-2 items-start justify-start",
             Navbar {}
-            Outlet::<Route> {}
+            div { class: "flex-1", Outlet::<Route> {} }
             Footer {}
         }
     }

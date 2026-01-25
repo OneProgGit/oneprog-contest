@@ -3,8 +3,7 @@ use dioxus::prelude::*;
 #[component]
 pub fn Market() -> Element {
     rsx! {
-        h1 { "Рынок" }
+        h1 { class: "italic", "Рынок будет доступен в версии 0.6.0" }
         div { class: "divider" }
-        h1 { class: "italic", "Будет доступно в версии 0.6" }
     }
 }

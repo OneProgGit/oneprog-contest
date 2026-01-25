@@ -3,8 +3,9 @@ use dioxus::prelude::*;
 #[component]
 pub fn Competitions() -> Element {
     rsx! {
-        h1 { "Соревнования" }
+        h1 { class: "italic",
+            "Соревнования будут доступны в версии 0.4.0"
+        }
         div { class: "divider" }
-        h1 { class: "italic", "Будет доступно в версии 0.4" }
     }
 }

@@ -10,4 +10,3 @@ pub mod problem;
 pub mod problems;
 pub mod support;
 pub mod user;
-pub mod users;
