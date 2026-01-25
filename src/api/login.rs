@@ -14,7 +14,7 @@ use crate::models::user::AuthRequest;
 use dioxus::{fullstack::Json, prelude::*};
 
 #[post("/api/u/login", State(state): State<AppStateType>)]
-async fn login(Json(user): Json<AuthRequest>) -> Result<String, ServerFnError> {
+async fn login(Json(user): Json<AuthRequest>) -> Result<String, HttpError> {
     let expected_user = state
         .db
         .get_user_by_username(&user.username)

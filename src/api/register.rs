@@ -11,7 +11,7 @@ use crate::models::user::AuthRequest;
 use dioxus::{fullstack::Json, prelude::*};
 
 #[post("/api/u/register", State(state): State<AppStateType>)]
-pub async fn register(Json(user): Json<AuthRequest>) -> Result<(), ServerFnError> {
+pub async fn register(Json(user): Json<AuthRequest>) -> Result<(), HttpError> {
     (user.username.len() >= 4 && user.username.len() <= 16)
         .or_bad_request("Логин может содержать минимум 4 и максимум 16 символов")?;
     (user.password.len() >= 8 && user.password.len() <= 32)

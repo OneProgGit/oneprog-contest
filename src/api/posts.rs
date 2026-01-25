@@ -8,7 +8,7 @@ use crate::models::post::{CreatePostRequest, Post};
 use dioxus::{fullstack::Json, prelude::*};
 
 #[post("/api/posts", State(state): State<AppStateType>, Auth(user): Auth)]
-async fn create_post(Json(post): Json<CreatePostRequest>) -> Result<(), ServerFnError> {
+async fn create_post(Json(post): Json<CreatePostRequest>) -> Result<(), HttpError> {
     (user.admin).or_forbidden("Для создания поста необходимы привилегии администратора")?;
 
     let db_new_post = DatabasePost {
@@ -27,7 +27,7 @@ async fn create_post(Json(post): Json<CreatePostRequest>) -> Result<(), ServerFn
 }
 
 #[get("/api/posts", State(state): State<AppStateType>)]
-pub async fn get_posts() -> Result<Vec<Post>, ServerFnError> {
+pub async fn get_posts() -> Result<Vec<Post>, HttpError> {
     let posts = state
         .db
         .get_posts()
