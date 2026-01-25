@@ -40,7 +40,10 @@ fn BlogPost(author_id: Uuid, title: String, content: String) -> Element {
         div { class: "card bg-base-300 w-96 shadow-sm",
             div { class: "card-body",
                 h1 { class: "card-title", {title} }
-                h3 { class: "font-medium", {author_id.to_string()} }
+                div { class: "flex gap-1",
+                    h3 { class: "font-medium", "Автор:" }
+                    h3 { class: "font-bold", {author_id.to_string()} }
+                }
                 p { {content} }
             }
         }
