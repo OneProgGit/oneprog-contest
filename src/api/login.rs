@@ -1,16 +1,20 @@
+#[cfg(feature = "server")]
 use crate::{
-    AppStateType,
-    crypt::verify_password,
-    database::Database,
-    jwt::create_jwt,
-    models::{jwt::JwtClaims, user::AuthRequest},
+    AppStateType, crypt::verify_password, database::Database, jwt::create_jwt,
+    models::jwt::JwtClaims,
 };
+
+#[cfg(feature = "server")]
 use chrono::{Duration, Utc};
+
+#[cfg(feature = "server")]
+use dioxus::server::axum::extract::State;
+
+use crate::models::user::AuthRequest;
 use dioxus::prelude::*;
-use dioxus::server::axum::extract::{Json, State};
 
 #[post("/api/u/login", State(state): State<AppStateType>)]
-async fn login(Json(user): Json<AuthRequest>) -> Result<String, HttpError> {
+async fn login(user: AuthRequest) -> Result<String, ServerFnError> {
     let expected_user = state
         .db
         .get_user_by_username(&user.username)

@@ -1,15 +1,17 @@
-use crate::{
-    AppStateType,
-    crypt::hash_password,
-    database::Database,
-    models::user::{AuthRequest, DatabaseUser},
-};
-use dioxus::prelude::*;
-use dioxus::server::axum::extract::{Json, State};
+#[cfg(feature = "server")]
+use crate::{AppStateType, crypt::hash_password, database::Database, models::user::DatabaseUser};
+
+#[cfg(feature = "server")]
+use dioxus::server::axum::extract::State;
+
+#[cfg(feature = "server")]
 use regex::Regex;
 
+use crate::models::user::AuthRequest;
+use dioxus::prelude::*;
+
 #[post("/api/u/register", State(state): State<AppStateType>)]
-pub async fn register(Json(user): Json<AuthRequest>) -> Result<(), HttpError> {
+pub async fn register(user: AuthRequest) -> Result<(), ServerFnError> {
     (user.username.len() >= 4 && user.username.len() <= 16)
         .or_bad_request("Логин может содержать минимум 4 и максимум 16 символов")?;
     (user.password.len() >= 8 && user.password.len() <= 32)

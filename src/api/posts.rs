@@ -1,15 +1,14 @@
-use crate::{
-    AppStateType,
-    database::Database,
-    middleware::auth::Auth,
-    models::post::{CreatePostRequest, DatabasePost, Post},
-};
+#[cfg(feature = "server")]
+use crate::{AppStateType, database::Database, middleware::auth::Auth, models::post::DatabasePost};
+
+#[cfg(feature = "server")]
+use dioxus::server::axum::extract::State;
+
+use crate::models::post::{CreatePostRequest, Post};
 use dioxus::prelude::*;
-use dioxus::server::axum::extract::{Json, State};
-use serde_json::{Value, json};
 
 #[post("/api/posts", State(state): State<AppStateType>, Auth(user): Auth)]
-async fn create_post(Json(post): Json<CreatePostRequest>) -> Result<Value, HttpError> {
+async fn create_post(post: CreatePostRequest) -> Result<(), ServerFnError> {
     (user.admin).or_forbidden("Для создания поста необходимы привилегии администратора")?;
 
     let db_new_post = DatabasePost {
@@ -24,11 +23,11 @@ async fn create_post(Json(post): Json<CreatePostRequest>) -> Result<Value, HttpE
         .await
         .or_internal_server_error("Не удалось создать пост")?;
 
-    Ok(json!({ "message" : "Пост создан успешно" }))
+    Ok(())
 }
 
 #[get("/api/posts", State(state): State<AppStateType>)]
-pub async fn get_posts() -> Result<Vec<Post>, HttpError> {
+pub async fn get_posts() -> Result<Vec<Post>, ServerFnError> {
     let posts = state
         .db
         .get_posts()
