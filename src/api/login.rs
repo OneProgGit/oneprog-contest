@@ -11,10 +11,10 @@ use chrono::{Duration, Utc};
 use dioxus::server::axum::extract::State;
 
 use crate::models::user::AuthRequest;
-use dioxus::prelude::*;
+use dioxus::{fullstack::Json, prelude::*};
 
 #[post("/api/u/login", State(state): State<AppStateType>)]
-async fn login(user: AuthRequest) -> Result<String, ServerFnError> {
+async fn login(Json(user): Json<AuthRequest>) -> Result<String, ServerFnError> {
     let expected_user = state
         .db
         .get_user_by_username(&user.username)

@@ -5,10 +5,10 @@ use crate::{AppStateType, database::Database, middleware::auth::Auth, models::po
 use dioxus::server::axum::extract::State;
 
 use crate::models::post::{CreatePostRequest, Post};
-use dioxus::prelude::*;
+use dioxus::{fullstack::Json, prelude::*};
 
 #[post("/api/posts", State(state): State<AppStateType>, Auth(user): Auth)]
-async fn create_post(post: CreatePostRequest) -> Result<(), ServerFnError> {
+async fn create_post(Json(post): Json<CreatePostRequest>) -> Result<(), ServerFnError> {
     (user.admin).or_forbidden("Для создания поста необходимы привилегии администратора")?;
 
     let db_new_post = DatabasePost {
