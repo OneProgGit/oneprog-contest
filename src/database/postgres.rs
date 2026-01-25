@@ -23,8 +23,8 @@ impl Database for PostgresDatabase {
     async fn create_user(&self, user: DatabaseUser) -> anyhow::Result<()> {
         sqlx::query(
             "
-            INSERT INTO users (username, hashed_password)
-            VALUES ($1, $2)
+            insert into users (username, hashed_password)
+            values ($1, $2)
             ",
         )
         .bind(user.username)
@@ -53,8 +53,8 @@ impl Database for PostgresDatabase {
     async fn create_post(&self, post: DatabasePost) -> anyhow::Result<()> {
         sqlx::query(
             "
-            INSERT INTO posts (author_id, title, content)
-            VALUES ($1, $2, $3)
+            insert into posts (author_id, title, content)
+            values ($1, $2, $3)
             ",
         )
         .bind(post.author_id)
@@ -66,7 +66,7 @@ impl Database for PostgresDatabase {
     }
 
     async fn get_posts(&self) -> anyhow::Result<Vec<Post>> {
-        let posts = sqlx::query_as("SELECT * FROM posts")
+        let posts = sqlx::query_as("select * from posts")
             .fetch_all(&self.pool)
             .await?;
         Ok(posts)
