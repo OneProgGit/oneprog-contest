@@ -16,7 +16,7 @@ pub fn Home() -> Element {
                     h1 { class: "italic opacity-70", "Загрузка постов..." }
                 }
             },
-            match &*posts_res.read() {
+            match posts_res.read().as_ref() {
                 Ok(posts) => rsx! {
                     for post in posts {
                         BlogPost {
