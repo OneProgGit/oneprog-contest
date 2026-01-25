@@ -5,7 +5,7 @@ use crate::models::user::PublicUser;
 use dioxus::prelude::*;
 
 #[get("/api/u/me", Auth(user): Auth)]
-async fn get_my_data() -> Result<PublicUser, ServerFnError> {
+async fn get_my_data() -> Result<PublicUser> {
     let public_user = PublicUser {
         id: user.id,
         username: user.username,
