@@ -18,7 +18,7 @@ pub fn Account() -> Element {
                         "Не администратор"
                     }
                 }
-                button { class: "btn btn- w-auto", "Выйти" }
+                button { class: "btn btn-error w-auto", "Выйти" }
             } else {
                 button { class: "btn btn-primary w-auto", "Зарегистрироваться" }
                 button { class: "btn btn-secondary w-auto", "Войти" }
