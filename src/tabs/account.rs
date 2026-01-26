@@ -10,12 +10,12 @@ pub fn Account() -> Element {
     rsx! {
         div { class: "flex flex-col gap-2",
             if let Some(user) = user.as_ref() {
-                h1 { class: "text-sm italic", "{user.username}" }
-                h1 {
+                div { class: "flex gap-2 items-center justify-center",
+                    h1 { class: "text-sm italic", "{user.username}" }
                     if user.admin {
-                        "Администратор"
+                        div { class: "badge badge-soft badge-success", "Администратор" }
                     } else {
-                        "Не администратор"
+                        div { class: "badge badge-soft badge-error", "Администратор" }
                     }
                 }
                 button { class: "btn btn-error w-auto", "Выйти" }
