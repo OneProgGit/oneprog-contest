@@ -25,7 +25,7 @@ pub fn Account() -> Element {
                 button {
                     class: "btn btn-primary w-auto",
                     onclick: move |_| {
-                        tracing::info!("Ss");
+                        tracing::info!("Test");
                         is_register_modal_open.set(true);
                     },
                     "Зарегистрироваться"
