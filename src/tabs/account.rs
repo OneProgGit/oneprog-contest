@@ -1,11 +1,13 @@
-use dioxus::prelude::*;
+use dioxus::{fullstack::Form, logger::tracing, prelude::*};
 
-use crate::app_state::ClientAppState;
+use crate::{api::register::register, app_state::ClientAppState, models::user::AuthRequest};
 
 #[component]
 pub fn Account() -> Element {
     let state = use_context::<ClientAppState>();
     let user = state.user.read();
+
+    let mut is_register_modal_open = use_signal(|| false);
 
     rsx! {
         div { class: "flex flex-col gap-2",
@@ -20,8 +22,39 @@ pub fn Account() -> Element {
                 }
                 button { class: "btn btn-error w-auto", "Выйти" }
             } else {
-                button { class: "btn btn-primary w-auto", "Зарегистрироваться" }
+                button {
+                    class: "btn btn-primary w-auto",
+                    onclick: move |_| {
+                        tracing::info!("Ss");
+                        is_register_modal_open.set(true);
+                    },
+                    "Зарегистрироваться"
+                }
                 button { class: "btn btn-secondary w-auto", "Войти" }
+
+                if is_register_modal_open() {
+                    dialog { class: "modal", open: true,
+                        div { class: "modal-box",
+                            form {
+                                input {
+                                    name: "username",
+                                    r#type: "text",
+                                    id: "username",
+                                    class: "input",
+                                    placeholder: "Введите логин...",
+                                }
+                                input {
+                                    name: "password",
+                                    r#type: "password",
+                                    id: "password",
+                                    class: "input",
+                                    placeholder: "Введите пароль...",
+                                }
+                                button { class: "btn btn-primary", "Зарегистрироваться" }
+                            }
+                        }
+                    }
+                }
             }
         }
         div { class: "divider" }

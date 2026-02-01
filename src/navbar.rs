@@ -24,33 +24,10 @@ pub fn Navbar() -> Element {
                 Link {
                     role: "tab",
                     class: "tab flex-1",
-                    to: Route::Problems {},
-                    "Задачи"
-                }
-                Link {
-                    role: "tab",
-                    class: "tab flex-1",
                     to: Route::Contests {},
                     "Контесты"
                 }
 
-                Link {
-                    role: "tab",
-                    class: "tab flex-1",
-                    to: Route::Competitions {},
-                    "Соревнования"
-                }
-
-                Link { role: "tab", class: "tab flex-1", to: Route::Market {}, "Рынок" }
-                Link {
-                    role: "tab",
-                    class: "tab flex-1",
-                    to: Route::Business {},
-                    "Бизнес"
-                }
-                Link { role: "tab", class: "tab flex-1", to: Route::Support {},
-                    "Поддержать"
-                }
                 Link { role: "tab", class: "tab flex-1", to: Route::Account {},
                     {
                         format!(

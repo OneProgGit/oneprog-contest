@@ -8,10 +8,12 @@ use dioxus::server::axum::extract::State;
 use regex::Regex;
 
 use crate::models::user::AuthRequest;
-use dioxus::{fullstack::Json, prelude::*};
+use dioxus::{fullstack::Form, prelude::*};
 
 #[post("/api/u/register", State(state): State<AppStateType>)]
-pub async fn register(Json(user): Json<AuthRequest>) -> Result<(), HttpError> {
+pub async fn register(form: Form<AuthRequest>) -> Result<(), HttpError> {
+    let user = form.0;
+
     (user.username.len() >= 4 && user.username.len() <= 16)
         .or_bad_request("Логин может содержать минимум 4 и максимум 16 символов")?;
     (user.password.len() >= 8 && user.password.len() <= 32)
