@@ -35,7 +35,7 @@ impl Database for PostgresDatabase {
     }
 
     async fn get_user_by_id(&self, id: Uuid) -> anyhow::Result<FullUser> {
-        let user = sqlx::query_as("SELECT * FROM users WHERE id=$1")
+        let user = sqlx::query_as("select * from users where id=$1")
             .bind(id)
             .fetch_one(&self.pool)
             .await?;
@@ -43,7 +43,7 @@ impl Database for PostgresDatabase {
     }
 
     async fn get_user_by_username(&self, username: &str) -> anyhow::Result<FullUser> {
-        let user = sqlx::query_as("SELECT * FROM users WHERE username=$1")
+        let user = sqlx::query_as("select * from users where username=$1")
             .bind(username)
             .fetch_one(&self.pool)
             .await?;
